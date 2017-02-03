@@ -53,6 +53,5 @@ public class NewsDaoImpl implements NewsDao {
      * @see NewsDao#removeNews(News)
     @Override
     public void removeNews(News news) throws DaoException {
-        return archive.remove(news);
     } */
 }

@@ -1,4 +1,4 @@
-package com.epam.oop.dao.util.converter.exception;
+package com.epam.oop.util.converter.exception;
 
 /**
  * Can be thrown if there were some troubles occurred while conversion.

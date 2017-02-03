@@ -6,17 +6,16 @@ import com.epam.oop.dao.exception.DaoException;
 import java.util.List;
 
 /**
- * TODO: add comments.
+ * Provides public interface for DAO layer.
  *
  * @author Uladzislau Seuruk.
  */
 public interface NewsDao {
     /**
-     * .
+     * Adds new news.
      *
-     * @param news
-     * @return
-     * @throws DaoException
+     * @param news <tt>News</tt> to add.
+     * @throws DaoException if there were some troubles occurred during execution.
      */
     void addNews(News news) throws DaoException;
 
@@ -25,16 +24,15 @@ public interface NewsDao {
      *
      * @param tags keywords for searching.
      * @return <tt>List</tt> with <tt>News</tt> that matches received tags.
-     * @throws DaoException
+     * @throws DaoException if there were some troubles occurred during execution.
      */
     List<News> getNews(String... tags) throws DaoException;
 
     /*
-     * .
+     * Removes news.
      *
-     * @param news
-     * @return
-     * @throws DaoException
+     * @param news <tt>News<tt> to remove.
+     * @throws DaoException if there were some troubles occurred during execution.
     void removeNews(News news) throws DaoException;
      */
 }

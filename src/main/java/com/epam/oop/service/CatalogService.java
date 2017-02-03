@@ -6,33 +6,33 @@ import com.epam.oop.service.exception.ServiceException;
 import java.util.List;
 
 /**
- * TODO: add comments.
+ * Provides public interface for Service layer.
  *
  * @author Uladzislau Seuruk.
  */
 public interface CatalogService {
     /**
-     * .
+     * Adds new news with received parameters.
      *
-     * @param news
-     * @throws ServiceException
+     * @param params <tt>String</tt> with <tt>News</tt> parameters.
+     * @throws ServiceException if there were some troubles occurred during execution.
      */
-    void addNews(News news) throws ServiceException;
+    void addNews(String params) throws ServiceException;
 
     /**
      * Returns <tt>List</tt> with <tt>News</tt> that matches received tags.
      *
      * @param tags keywords for searching.
      * @return <tt>List</tt> with <tt>News</tt> that matches received tags.
-     * @throws ServiceException
+     * @throws ServiceException if there were some troubles occurred during execution.
      */
     List<News> getNews(String... tags) throws ServiceException;
 
     /*
-     * .
+     * Removes news with received parameters.
      *
-     * @param news
-     * @throws ServiceException
-    void removeNews(News news) throws ServiceException;
+     * @param params <tt>String</tt> with <tt>News</tt> parameters.
+     * @throws ServiceException if there were some troubles occurred during execution.
+    void removeNews(String params) throws ServiceException;
      */
 }

@@ -19,6 +19,14 @@ import java.util.Set;
  */
 public class TxtReader implements NewsReader {
     /**
+     * Symbol that indicates the start of news record.
+     */
+    public static final char RECORD_START_SYMBOL = '{';
+    /**
+     * Symbol that indicates the end of news record.
+     */
+    public static final char RECORD_END_SYMBOL = '}';
+    /**
      * File with data.
      */
     private File file;
@@ -54,11 +62,16 @@ public class TxtReader implements NewsReader {
         }
         Set<News> newsSet = new HashSet<>();
         try (Scanner scanner = new Scanner(file)) {
+            scanner.useDelimiter(String.valueOf(RECORD_END_SYMBOL));
             TxtNewsParser parser = new TxtNewsParser();
             while (scanner.hasNext()) {
                 String line = scanner.nextLine();
+                line = line.trim();
+                if (!line.startsWith(String.valueOf(RECORD_START_SYMBOL))) {
+                    throw new ReadingException("Data corruption.");
+                }
                 if (isFit(line, args)) {
-                    newsSet.add(parser.parse(line));
+                    newsSet.add(parser.parse(line.substring(1, line.length() - 1)));
                 }
             }
         } catch (FileNotFoundException | ItemParsingException e) {

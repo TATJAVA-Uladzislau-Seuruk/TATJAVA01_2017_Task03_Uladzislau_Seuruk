@@ -2,6 +2,7 @@ package com.epam.oop.dao.util.writer.impl;
 
 import com.epam.oop.bean.News;
 import com.epam.oop.dao.util.parser.TxtNewsParser;
+import com.epam.oop.dao.util.reader.impl.TxtReader;
 import com.epam.oop.dao.util.writer.NewsWriter;
 import com.epam.oop.dao.util.writer.exception.WritingException;
 
@@ -12,7 +13,7 @@ import java.io.OutputStreamWriter;
 import java.io.IOException;
 
 /**
- * TODO: add comments.
+ * Adds new news record to file.
  *
  * @author Uladzislau Seuruk.
  */
@@ -63,21 +64,22 @@ public class TxtWriter implements NewsWriter {
     private StringBuilder addValueToString(StringBuilder builder,
                                            String key,
                                            String value) {
-        builder.append(key)
+        builder.append(TxtNewsParser.PARAMETER_START)
+                .append(key)
                 .append(TxtNewsParser.VALUE_DELIMITER)
-                .append("\"")
                 .append(value)
-                .append("\"")
-                .append(TxtNewsParser.PARAMETER_DELIMITER);
+                .append(TxtNewsParser.PARAMETER_END);
         return builder;
     }
 
     private String makeFormattedString(News news) {
         StringBuilder builder = new StringBuilder();
-        builder.append("\n");
+        builder.append("\n")
+                .append(TxtReader.RECORD_START_SYMBOL);
         builder = addValueToString(builder, "category", news.getCategory().toString());
         builder = addValueToString(builder, "title", news.getTitle());
         builder = addValueToString(builder, "date", news.getPublicationDate());
+        builder.append(TxtReader.RECORD_END_SYMBOL);
         return  builder.toString();
     }
 }

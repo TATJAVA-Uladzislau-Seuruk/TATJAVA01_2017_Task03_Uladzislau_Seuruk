@@ -4,6 +4,8 @@ import com.epam.oop.bean.News;
 import com.epam.oop.dao.exception.DaoException;
 import com.epam.oop.dao.factory.DaoFactory;
 import com.epam.oop.service.exception.ServiceException;
+import com.epam.oop.service.util.NewsParamsParser;
+import com.epam.oop.service.util.exception.NewsParamsParsingException;
 
 import java.util.List;
 
@@ -14,18 +16,20 @@ import java.util.List;
  */
 public class CatalogServiceImpl implements CatalogService {
     /**
-     * @see CatalogService#addNews(News)
+     * @see CatalogService#addNews(String)
      */
     @Override
-    public void addNews(News news) throws ServiceException {
-        if (news == null) {
+    public void addNews(String params) throws ServiceException {
+        if (params == null) {
             throw new ServiceException("News was not initialized.");
         }
-        DaoFactory factory = DaoFactory.getInstance();
         try {
+            NewsParamsParser parser = new NewsParamsParser();
+            News news = parser.parse(params);
+            DaoFactory factory = DaoFactory.getInstance();
             factory.getNewsDao().addNews(news);
-        } catch (DaoException de) {
-            throw new ServiceException(de);
+        } catch (DaoException | NewsParamsParsingException e) {
+            throw new ServiceException(e);
         }
     }
 
@@ -46,18 +50,9 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     /*
-     * @see CatalogService#removeNews(News)
+     * @see CatalogService#removeNews(String)
     @Override
-    public void removeNews(News news) throws ServiceException {
-        if (news == null) {
-            throw new ServiceException("News was not initialized.");
-        }
-        DaoFactory factory = DaoFactory.getInstance();
-        try {
-            factory.getNewsDao().removeNews(news);
-        } catch (DaoException de) {
-            throw new ServiceException(de);
-        }
+    public void removeNews(String params) throws ServiceException {
     }
      */
 }

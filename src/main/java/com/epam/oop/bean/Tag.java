@@ -1,11 +1,11 @@
-package com.epam.oop.dao.util.parser;
+package com.epam.oop.bean;
 
 /**
  * Known parameters tags.
  *
  * @author Uladzislau Seuruk.
  */
-enum Tag {
+public enum Tag {
     CATEGORY,
     DATE,
     TITLE

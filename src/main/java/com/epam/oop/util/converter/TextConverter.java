@@ -1,7 +1,7 @@
-package com.epam.oop.dao.util.converter;
+package com.epam.oop.util.converter;
 
 import com.epam.oop.bean.Category;
-import com.epam.oop.dao.util.converter.exception.ConversionException;
+import com.epam.oop.util.converter.exception.ConversionException;
 
 import java.util.Date;
 import java.util.GregorianCalendar;

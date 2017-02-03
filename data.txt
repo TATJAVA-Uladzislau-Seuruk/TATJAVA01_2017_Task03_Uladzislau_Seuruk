@@ -1,13 +1,12 @@
-category="film" title="Iron Man" date="20.07.2017"
-category="film" title="Star Wars: Episode IV" date="20.07.2017"
-category="film" title="1+1" date="20.07.2017"
-category="film" title="Watchman" date="20.01.2017"
-category="Book" title="The Great Atlas of the Stars" date="20.07.2017"
-category="BOOK" title="100 Greatest People" date="20.08.2017"
-category="booK" title="Around the World in Eighty Days" date="19.07.2017"
-category="boOk" title="Learning Java" date="20.07.2018"
-category="BOoK" title="" date="20.07.2016"
-category="BOoK" title="" date="20.07.2016"
-category="disk" title="100 Greatest Songs of All Time" date="20.07.2017"
-category="disk" title="Rock Music Compilation" date="20.07.2017"
-category="disk" title="Learn English in 100 Days" date="20.07.2017"
+{[category|FILM][title|Iron Man][date|20.07.2017]}
+{[category|FILM][title|Star Wars: Episode IV][date|20.07.2017]}
+{[category|FILM][title|1+1][date|20.07.2017]}
+{[category|FILM][title|Watchman][date|20.01.2017]}
+{[category|BOOK][title|The Great Atlas of the Stars][date|20.07.2017]}
+{[category|BOOK][title|100 Greatest People][date|20.08.2017]}
+{[category|BOOK][title|Around the World in Eighty Days][date|19.07.2017]}
+{[category|BOOK][title|Learning Java][date|20.07.2018]}
+{[category|BOOK][title|][date|20.07.2016]}
+{[category|DISK][title|100 Greatest Songs of All Time][date|20.07.2017]}
+{[category|DISK][title|Rock Music Compilation][date|20.07.2017]}
+{[category|DISK][title|Learn English in 100 Days][date|20.07.2017]}
