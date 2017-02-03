@@ -21,15 +21,10 @@ public interface NewsDao {
     void addNews(News news) throws DaoException;
 
     /**
-     * .
-     */
-    List<News> getAllNews() throws DaoException;
-
-    /**
-     * .
+     * Returns <tt>List</tt> with <tt>News</tt> that matches received tags.
      *
-     * @param tags
-     * @return
+     * @param tags keywords for searching.
+     * @return <tt>List</tt> with <tt>News</tt> that matches received tags.
      * @throws DaoException
      */
     List<News> getNews(String... tags) throws DaoException;

@@ -6,6 +6,7 @@ import com.epam.oop.dao.util.converter.TextConverter;
 import com.epam.oop.dao.util.converter.exception.ConversionException;
 import com.epam.oop.dao.util.parser.exception.ItemParsingException;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,17 +16,15 @@ import java.util.Map;
  *
  * @author Uladzislau Seuruk.
  */
-public class TextParser {
+public class TxtNewsParser {
     /**
      * Symbol that separates different parameters.
      */
-    private static final char PARAMETER_DELIMITER = ' ';
+    public static final char PARAMETER_DELIMITER = ' ';
     /**
      * Symbol that separates parameter name from value.
      */
-    private static final char VALUE_DELIMITER = '=';
-
-    public TextParser() {}
+    public static final char VALUE_DELIMITER = '=';
 
     /**
      * Parses received <tt>String</tt> for news.
@@ -48,7 +47,8 @@ public class TextParser {
             if (title == null) {
                 throw new ItemParsingException("Title is missing.");
             }
-            return new News(category, title, new Date());
+            String currentDate = getFormattedDate(new Date());
+            return new News(category, title, currentDate);
         } catch (ConversionException ce) {
             throw new ItemParsingException(ce);
         }
@@ -76,5 +76,17 @@ public class TextParser {
             valueDelimPosition = params.indexOf(VALUE_DELIMITER);
         }
         return paramsMap;
+    }
+
+    private String getFormattedDate(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        StringBuilder builder = new StringBuilder();
+        builder.append(calendar.get(Calendar.DAY_OF_MONTH))
+                .append(".")
+                .append(calendar.get(Calendar.MONTH) + 1)
+                .append(".")
+                .append(calendar.get(Calendar.YEAR));
+        return builder.toString();
     }
 }

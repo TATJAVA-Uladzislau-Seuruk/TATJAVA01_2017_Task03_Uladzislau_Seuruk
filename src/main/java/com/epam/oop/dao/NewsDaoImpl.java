@@ -2,14 +2,15 @@ package com.epam.oop.dao;
 
 import com.epam.oop.bean.News;
 import com.epam.oop.dao.exception.DaoException;
-import com.epam.oop.dao.util.reader.NewsReader;
 import com.epam.oop.dao.util.reader.exception.ReadingException;
-import com.epam.oop.dao.util.reader.impl.TextReader;
-import com.epam.oop.dao.util.writer.NewsWriter;
+import com.epam.oop.dao.util.reader.impl.TxtReader;
 import com.epam.oop.dao.util.writer.exception.WritingException;
 import com.epam.oop.dao.util.writer.impl.TxtWriter;
 
-import java.util.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Implementation of DAO layer.
@@ -18,12 +19,10 @@ import java.util.*;
  */
 public class NewsDaoImpl implements NewsDao {
     /**
-     * TODO:
+     * Default path to file.
      */
-    private NewsWriter writer = new TxtWriter();
-    private NewsReader reader = new TextReader();
-
-    public NewsDaoImpl() {}
+    private static final String DEFAULT_FILE_PATH = System.getProperty("user.dir")
+            + File.separator + "data.txt";
 
     /**
      * @see NewsDao#addNews(News)
@@ -31,21 +30,9 @@ public class NewsDaoImpl implements NewsDao {
     @Override
     public void addNews(News news) throws DaoException {
         try {
-            writer.writeToEnd(news);
+            new TxtWriter(DEFAULT_FILE_PATH).writeToEnd(news);
         } catch (WritingException we) {
             throw new DaoException(we);
-        }
-    }
-
-    /**
-     * @see NewsDao#getAllNews()
-     */
-    @Override
-    public List<News> getAllNews() throws DaoException {
-        try {
-            return new ArrayList<>(reader.read());
-        } catch (ReadingException re) {
-            throw new DaoException(re);
         }
     }
 
@@ -55,13 +42,12 @@ public class NewsDaoImpl implements NewsDao {
     @Override
     public List<News> getNews(String... tags) throws DaoException {
         try {
-            Set<News> newsSet = reader.read(tags);
-            return new LinkedList<>(newsSet);
+            Set<News> newsSet = new TxtReader(DEFAULT_FILE_PATH).read(tags);
+            return new ArrayList<>(newsSet);
         } catch (ReadingException re) {
             throw new DaoException(re);
         }
     }
-
 
     /*
      * @see NewsDao#removeNews(News)

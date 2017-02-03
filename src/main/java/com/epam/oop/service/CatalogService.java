@@ -20,10 +20,10 @@ public interface CatalogService {
     void addNews(News news) throws ServiceException;
 
     /**
-     * .
+     * Returns <tt>List</tt> with <tt>News</tt> that matches received tags.
      *
-     * @param tags
-     * @return
+     * @param tags keywords for searching.
+     * @return <tt>List</tt> with <tt>News</tt> that matches received tags.
      * @throws ServiceException
      */
     List<News> getNews(String... tags) throws ServiceException;

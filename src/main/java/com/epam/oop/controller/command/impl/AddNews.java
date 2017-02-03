@@ -3,7 +3,7 @@ package com.epam.oop.controller.command.impl;
 import com.epam.oop.bean.News;
 import com.epam.oop.controller.command.Command;
 import com.epam.oop.dao.util.parser.exception.ItemParsingException;
-import com.epam.oop.dao.util.parser.TextParser;
+import com.epam.oop.dao.util.parser.TxtNewsParser;
 import com.epam.oop.controller.command.exception.CommandExecutionException;
 import com.epam.oop.service.exception.ServiceException;
 import com.epam.oop.service.factory.ServiceFactory;
@@ -26,7 +26,7 @@ public class AddNews extends Command {
     public String execute(String params) throws CommandExecutionException {
         try {
             params = params.trim();
-            News news = new TextParser().parse(params);
+            News news = new TxtNewsParser().parse(params);
             ServiceFactory factory = ServiceFactory.getInstance();
             factory.getCatalogService().addNews(news);
         } catch (ItemParsingException | ServiceException e) {

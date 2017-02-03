@@ -1,13 +1,13 @@
 package com.epam.oop.bean;
 
-import java.util.Date;
+import java.io.Serializable;
 
 /**
  * Provides information about single news.
  *
  * @author Uladzislau Seuruk.
  */
-public class News {
+public class News implements Serializable {
     /**
      * Category of this news.
      */
@@ -15,7 +15,7 @@ public class News {
     /**
      * Publication date of this news.
      */
-    private Date publicationDate = null;
+    private String publicationDate = null;
     /**
      * Title of this news.
      */
@@ -24,10 +24,51 @@ public class News {
     public News() {
     }
 
-    public News(Category category, String title, Date date) {
+    public News(Category category, String title, String date) {
         this.category = category;
         this.title = title;
         this.publicationDate = date;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null) {
+            return false;
+        }
+        if (this.getClass() != object.getClass()) {
+            return false;
+        }
+
+        News news = (News) object;
+
+        if (this.category == null) {
+            if (news.category != null) {
+                return false;
+            }
+        } else {
+            if (!this.category.equals(news.category)) {
+                return false;
+            }
+        }
+
+        if (this.publicationDate == null) {
+            if (news.publicationDate != null) {
+                return false;
+            }
+        } else {
+            if (!this.publicationDate.equals(news.publicationDate)) {
+                return false;
+            }
+        }
+
+        if (this.title == null) {
+            return news.title == null;
+        } else {
+            return this.title.equals(news.title);
+        }
     }
 
     /**
@@ -40,7 +81,7 @@ public class News {
     /**
      * Getter.
      */
-    public Date getPublicationDate() {
+    public String getPublicationDate() {
         return publicationDate;
     }
 
@@ -51,19 +92,18 @@ public class News {
         return title;
     }
 
-    /**
-     * Setter.
-     */
-    public void setCategory(Category category) {
-        this.category = category;
+    @Override
+    public int hashCode() {
+        int hash = 1;
+        hash = hash * 17 + (category == null ? 0 : category.hashCode());
+        hash = hash * 31 + (publicationDate == null ? 0 : publicationDate.hashCode());
+        hash = hash * 13 + (title == null ? 0 : title.hashCode());
+        return hash;
     }
 
-    /**
-     * Setter.
-     */
-    public void setTitle(String title) {
-        this.title = title;
+    @Override
+    public String toString() {
+        return getClass().getName() + "@" + "category: " + category.toString() + ", publicationDate: "
+                + publicationDate + ", title: " + title;
     }
-
-    //TODO: add equals, hashCode and serializable methods.
 }
