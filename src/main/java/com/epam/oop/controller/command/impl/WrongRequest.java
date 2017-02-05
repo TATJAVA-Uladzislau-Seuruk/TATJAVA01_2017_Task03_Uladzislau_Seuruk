@@ -7,7 +7,7 @@ import com.epam.oop.controller.command.Command;
  *
  * @author Uladzislau Seuruk.
  */
-public class WrongRequest extends Command {
+public class WrongRequest implements Command {
     /**
      * Name of command.
      */

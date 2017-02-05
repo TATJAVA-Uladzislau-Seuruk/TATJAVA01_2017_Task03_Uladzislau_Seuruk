@@ -22,17 +22,9 @@ public interface CatalogService {
     /**
      * Returns <tt>List</tt> with <tt>News</tt> that matches received tags.
      *
-     * @param tags keywords for searching.
+     * @param tags <tt>String</tt> with keywords for search.
      * @return <tt>List</tt> with <tt>News</tt> that matches received tags.
      * @throws ServiceException if there were some troubles occurred during execution.
      */
-    List<News> getNews(String... tags) throws ServiceException;
-
-    /*
-     * Removes news with received parameters.
-     *
-     * @param params <tt>String</tt> with <tt>News</tt> parameters.
-     * @throws ServiceException if there were some troubles occurred during execution.
-    void removeNews(String params) throws ServiceException;
-     */
+    List<News> getNews(String tags) throws ServiceException;
 }

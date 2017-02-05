@@ -1,6 +1,7 @@
 package com.epam.oop.dao.util.reader.impl;
 
 import com.epam.oop.bean.News;
+import com.epam.oop.dao.util.ParsingSymbols;
 import com.epam.oop.dao.util.parser.TxtNewsParser;
 import com.epam.oop.dao.util.parser.exception.ItemParsingException;
 import com.epam.oop.dao.util.reader.NewsReader;
@@ -18,14 +19,6 @@ import java.util.Set;
  * @author Uladzislau Seuruk.
  */
 public class TxtReader implements NewsReader {
-    /**
-     * Symbol that indicates the start of news record.
-     */
-    public static final char RECORD_START_SYMBOL = '{';
-    /**
-     * Symbol that indicates the end of news record.
-     */
-    public static final char RECORD_END_SYMBOL = '}';
     /**
      * File with data.
      */
@@ -62,20 +55,17 @@ public class TxtReader implements NewsReader {
         }
         Set<News> newsSet = new HashSet<>();
         try (Scanner scanner = new Scanner(file)) {
-            scanner.useDelimiter(String.valueOf(RECORD_END_SYMBOL));
+            scanner.useDelimiter(String.valueOf(ParsingSymbols.RECORD_END_SYMBOL));
             TxtNewsParser parser = new TxtNewsParser();
             while (scanner.hasNext()) {
                 String line = scanner.nextLine();
                 line = line.trim();
-                if (!line.startsWith(String.valueOf(RECORD_START_SYMBOL))) {
-                    throw new ReadingException("Data corruption.");
-                }
                 if (isFit(line, args)) {
-                    newsSet.add(parser.parse(line.substring(1, line.length() - 1)));
+                    newsSet.add(parser.parse(line));
                 }
             }
         } catch (FileNotFoundException | ItemParsingException e) {
-            throw new ReadingException(e);
+            throw new ReadingException(e.getMessage(), e);
         }
         return newsSet;
     }

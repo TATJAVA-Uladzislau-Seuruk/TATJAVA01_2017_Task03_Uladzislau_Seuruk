@@ -32,7 +32,7 @@ public class NewsDaoImpl implements NewsDao {
         try {
             new TxtWriter(DEFAULT_FILE_PATH).writeToEnd(news);
         } catch (WritingException we) {
-            throw new DaoException(we);
+            throw new DaoException(we.getMessage(), we);
         }
     }
 
@@ -45,13 +45,7 @@ public class NewsDaoImpl implements NewsDao {
             Set<News> newsSet = new TxtReader(DEFAULT_FILE_PATH).read(tags);
             return new ArrayList<>(newsSet);
         } catch (ReadingException re) {
-            throw new DaoException(re);
+            throw new DaoException(re.getMessage(), re);
         }
     }
-
-    /*
-     * @see NewsDao#removeNews(News)
-    @Override
-    public void removeNews(News news) throws DaoException {
-    } */
 }

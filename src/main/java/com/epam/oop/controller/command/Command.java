@@ -7,7 +7,7 @@ import com.epam.oop.controller.command.exception.CommandExecutionException;
  *
  * @author Uladzislau Seuruk.
  */
-public abstract class Command {
+public interface Command {
     /**
      * Executes command.
      *
@@ -15,5 +15,5 @@ public abstract class Command {
      * @return <tt>String</tt> with response.
      * @throws CommandExecutionException if there were some troubles occurred during command execution.
      */
-    public abstract String execute(String params) throws CommandExecutionException;
+    String execute(String params) throws CommandExecutionException;
 }

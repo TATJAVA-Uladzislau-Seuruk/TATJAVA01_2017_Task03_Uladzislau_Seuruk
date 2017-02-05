@@ -1,31 +1,13 @@
 <items>
-  <item category="film" title="Iron Man" date="20.07.2017"/>
-  <item category="film" title="Star Wars: Episode IV" date="20.07.2017"/>
-  <item category="film" title="1+1" date="20.07.2017"/>
-  <item category="film" title="Watchman" date="20.01.2017"/>
-
-  <item category="Book" title="The Great Atlas of the Stars" date="20.07.2017"/>
-  <item category="BOOK" title="100 Greatest People" date="20.08.2017"/>
-  <item category="booK" title="Around the World in Eighty Days" date="19.07.2017"/>
-  <item category="boOk" title="Learning Java" date="20.07.2018"/>
-  <item category="BOoK" title="" date="20.07.2016"/>
-  <item category="BOoK" title="" date="20.07.2016"/>
-
-  <item category="disk" title="100 Greatest Songs of All Time" date="20.07.2017"/>
-  <item category="disk" title="Rock Music Compilation" date="20.07.2017"/>
-  <item category="disk" title="Learn English in 100 Days" date="20.07.2017"/>
-
-  <item category="desk" title="New Year Songs Compilation" date="20.07.2017"/>
-
-  <item category="disk" title="New Year Songs Compilation" date=""/>
-  <item category="disk" title="New Year Songs Compilation" date="20"/>
-  <item category="disk" title="New Year Songs Compilation" date="20.2017"/>
-  <item category="disk" title="New Year Songs Compilation" date="31.2.2017"/>
-  <item category="disk" title="New Year Songs Compilation" date="31.13.2017"/>
-  <item category="disk" title="New Year Songs Compilation" date="32.01.2017"/>
-  <item category="disk" title="New Year Songs Compilation" date="00.02.2017"/>
-
-  <item title="New Year Songs Compilation" date="20.07.2017"/>
-  <item category="disk" date="20.07.2017"/>
-  <item category="disk" title="New Year Songs Compilation"/>
+  <item CATEGORY="FILM" TITLE="Iron Man" DATE="20.07.2017"/>
+  <item CATEGORY="FILM" TITLE="Star Wars: Episode IV" DATE="20.07.2017"/>
+  <item CATEGORY="FILM" TITLE="1+1" DATE="20.07.2017"/>
+  <item CATEGORY="FILM" TITLE="Watchman" DATE="20.01.2017"/>
+  <item CATEGORY="BOOK" TITLE="The Great Atlas of the Stars" DATE="20.07.2017"/>
+  <item CATEGORY="BOOK" TITLE="100 Greatest People" DATE="20.08.2017"/>
+  <item CATEGORY="BOOK" TITLE="Around the World in Eighty Days" DATE="19.07.2017"/>
+  <item CATEGORY="BOOK" TITLE="Learning Java" DATE="20.07.2018"/>
+  <item CATEGORY="DISK" TITLE="100 Greatest Songs of All Time" DATE="20.07.2017"/>
+  <item CATEGORY="DISK" TITLE="Rock Music Compilation" DATE="20.07.2017"/>
+  <item CATEGORY="DISK" TITLE="Learn English in 100 Days" DATE="20.07.2017"/>
 </items>

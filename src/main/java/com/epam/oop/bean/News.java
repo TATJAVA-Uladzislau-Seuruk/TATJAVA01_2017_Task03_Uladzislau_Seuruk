@@ -21,8 +21,7 @@ public class News implements Serializable {
      */
     private String title = null;
 
-    public News() {
-    }
+    public News() {}
 
     public News(Category category, String title, String date) {
         this.category = category;

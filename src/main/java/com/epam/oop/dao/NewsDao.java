@@ -27,12 +27,4 @@ public interface NewsDao {
      * @throws DaoException if there were some troubles occurred during execution.
      */
     List<News> getNews(String... tags) throws DaoException;
-
-    /*
-     * Removes news.
-     *
-     * @param news <tt>News<tt> to remove.
-     * @throws DaoException if there were some troubles occurred during execution.
-    void removeNews(News news) throws DaoException;
-     */
 }

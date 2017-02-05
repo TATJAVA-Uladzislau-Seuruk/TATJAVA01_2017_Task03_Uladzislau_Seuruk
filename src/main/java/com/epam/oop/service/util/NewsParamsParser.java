@@ -44,7 +44,7 @@ public class NewsParamsParser {
         if (params == null) {
             throw new NewsParamsParsingException("String with parameters was not initialized.");
         }
-        Map<String, String> paramsMap = getParametersMap(params);
+        Map<String, String> paramsMap = makeParamsMap(params);
         String categoryParam = paramsMap.get(Tag.CATEGORY.toString());
         if (categoryParam == null) {
             throw new NewsParamsParsingException("Category is missing.");
@@ -55,14 +55,34 @@ public class NewsParamsParser {
             if (title == null) {
                 throw new NewsParamsParsingException("Title is missing.");
             }
-            String currentDate = getFormattedDate(new Date());
+            if (title.isEmpty()) {
+                throw new NewsParamsParsingException("Title is empty.");
+            }
+            String currentDate = formatDate(new Date());
+            if (LOG.isDebugEnabled()) {
+                LOG.debug(params + " : " + category + ", " + title + ", " + currentDate);
+            }
             return new News(category, title, currentDate);
         } catch (ConversionException ce) {
-            throw new NewsParamsParsingException(ce);
+            throw new NewsParamsParsingException(ce.getMessage(), ce);
         }
     }
 
-    private Map<String, String> getParametersMap(String params) {
+    /**
+     * Splits received <tt>String</tt> with parameters.
+     *
+     * @param tags <tt>String</tt> with parameters.
+     * @return <tt>String</tt> array with separated parameters.
+     * @throws NewsParamsParsingException if received <tt>String</tt> was not initialized.
+     */
+    public String[] splitParams(String tags) throws NewsParamsParsingException {
+        if (tags == null) {
+            throw new NewsParamsParsingException("Tags was not initialized.");
+        }
+        return tags.split(String.valueOf(PARAMETER_DELIMITER));
+    }
+
+    private Map<String, String> makeParamsMap(String params) {
         Map<String, String> paramsMap = new HashMap<>();
         int valueDelimPosition = params.indexOf(VALUE_DELIMITER);
         while (valueDelimPosition != -1) {
@@ -86,18 +106,28 @@ public class NewsParamsParser {
         return paramsMap;
     }
 
-    private String getFormattedDate(Date date) {
+    private String formatDate(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         StringBuilder builder = new StringBuilder();
-        builder.append(calendar.get(Calendar.DAY_OF_MONTH))
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        builder.append(formatSmallValue(day))
                 .append(".")
-                .append(calendar.get(Calendar.MONTH) + 1)
+                .append(formatSmallValue(month))
                 .append(".")
                 .append(calendar.get(Calendar.YEAR));
         if (LOG.isDebugEnabled()) {
-            LOG.debug(date.toString() + "\n" + builder.toString());
+            LOG.debug(date.toString() + " : " + builder.toString());
         }
         return builder.toString();
+    }
+
+    private String formatSmallValue(int value) {
+        if (value < 10) {
+            return "0" + value;
+        } else {
+            return "" + value;
+        }
     }
 }

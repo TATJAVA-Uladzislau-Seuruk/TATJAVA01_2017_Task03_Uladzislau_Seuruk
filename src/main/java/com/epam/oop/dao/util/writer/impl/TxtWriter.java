@@ -1,8 +1,8 @@
 package com.epam.oop.dao.util.writer.impl;
 
 import com.epam.oop.bean.News;
-import com.epam.oop.dao.util.parser.TxtNewsParser;
-import com.epam.oop.dao.util.reader.impl.TxtReader;
+import com.epam.oop.bean.Tag;
+import com.epam.oop.dao.util.ParsingSymbols;
 import com.epam.oop.dao.util.writer.NewsWriter;
 import com.epam.oop.dao.util.writer.exception.WritingException;
 
@@ -57,29 +57,29 @@ public class TxtWriter implements NewsWriter {
                         new FileOutputStream(file, true)))) {
             out.append(makeFormattedString(news));
         } catch (IOException e) {
-            throw new WritingException(e);
+            throw new WritingException(e.getMessage(), e);
         }
     }
 
-    private StringBuilder addValueToString(StringBuilder builder,
-                                           String key,
-                                           String value) {
-        builder.append(TxtNewsParser.PARAMETER_START)
+    private StringBuilder appendParam(StringBuilder builder,
+                                      String key,
+                                      String value) {
+        builder.append(ParsingSymbols.PARAMETER_START)
                 .append(key)
-                .append(TxtNewsParser.VALUE_DELIMITER)
+                .append(ParsingSymbols.VALUE_DELIMITER)
                 .append(value)
-                .append(TxtNewsParser.PARAMETER_END);
+                .append(ParsingSymbols.PARAMETER_END);
         return builder;
     }
 
     private String makeFormattedString(News news) {
         StringBuilder builder = new StringBuilder();
         builder.append("\n")
-                .append(TxtReader.RECORD_START_SYMBOL);
-        builder = addValueToString(builder, "category", news.getCategory().toString());
-        builder = addValueToString(builder, "title", news.getTitle());
-        builder = addValueToString(builder, "date", news.getPublicationDate());
-        builder.append(TxtReader.RECORD_END_SYMBOL);
+                .append(ParsingSymbols.RECORD_START_SYMBOL);
+        builder = appendParam(builder, Tag.CATEGORY.toString(), news.getCategory().toString());
+        builder = appendParam(builder, Tag.TITLE.toString(), news.getTitle());
+        builder = appendParam(builder, Tag.DATE.toString(), news.getPublicationDate());
+        builder.append(ParsingSymbols.RECORD_END_SYMBOL);
         return  builder.toString();
     }
 }

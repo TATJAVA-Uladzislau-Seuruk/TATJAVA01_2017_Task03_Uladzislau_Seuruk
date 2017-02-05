@@ -6,11 +6,11 @@ import com.epam.oop.service.exception.ServiceException;
 import com.epam.oop.service.factory.ServiceFactory;
 
 /**
- * Implements Command interface for add command.
+ * Implements Command interface for add new news command.
  *
  * @author Uladzislau Seuruk.
  */
-public class AddNews extends Command {
+public class AddNews implements Command {
     /**
      * Name of command.
      */
@@ -22,11 +22,10 @@ public class AddNews extends Command {
     @Override
     public String execute(String params) throws CommandExecutionException {
         try {
-            params = params.trim();
             ServiceFactory factory = ServiceFactory.getInstance();
             factory.getCatalogService().addNews(params);
         } catch (ServiceException e) {
-            throw new CommandExecutionException(e);
+            throw new CommandExecutionException(e.getMessage(), e);
         }
         return "News was successfully added.";
     }

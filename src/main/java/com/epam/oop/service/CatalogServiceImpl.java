@@ -21,38 +21,49 @@ public class CatalogServiceImpl implements CatalogService {
     @Override
     public void addNews(String params) throws ServiceException {
         if (params == null) {
-            throw new ServiceException("News was not initialized.");
+            throw new ServiceException("String with news parameters was not initialized.");
         }
         try {
+            params = params.trim();
             NewsParamsParser parser = new NewsParamsParser();
             News news = parser.parse(params);
+            if (isNewsAlreadyInBase(news)) {
+                throw new ServiceException("Such news already exist.");
+            }
             DaoFactory factory = DaoFactory.getInstance();
             factory.getNewsDao().addNews(news);
         } catch (DaoException | NewsParamsParsingException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage(), e);
         }
     }
 
     /**
-     * @see CatalogService#getNews(String...)
+     * @see CatalogService#getNews(String)
      */
     @Override
-    public List<News> getNews(String... tags) throws ServiceException {
+    public List<News> getNews(String tags) throws ServiceException {
         if (tags == null) {
-            throw new ServiceException("Tags was not initialized.");
+            throw new ServiceException("Sting with tags was not initialized.");
         }
-        DaoFactory factory = DaoFactory.getInstance();
         try {
-            return factory.getNewsDao().getNews(tags);
-        } catch (DaoException de) {
-            throw new ServiceException(de);
+            tags = tags.trim();
+            NewsParamsParser parser = new NewsParamsParser();
+            String[] params = parser.splitParams(tags);
+            DaoFactory factory = DaoFactory.getInstance();
+            return factory.getNewsDao().getNews(params);
+        } catch (DaoException | NewsParamsParsingException e) {
+            throw new ServiceException(e.getMessage(), e);
         }
     }
 
-    /*
-     * @see CatalogService#removeNews(String)
-    @Override
-    public void removeNews(String params) throws ServiceException {
+    private boolean isNewsAlreadyInBase(News newsToAdd) throws ServiceException {
+        String request = newsToAdd.getTitle() + " " + newsToAdd.getCategory().toString();
+        List<News> newsList = getNews(request);
+        for (News news : newsList) {
+            if (news.equals(newsToAdd)) {
+                return true;
+            }
+        }
+        return false;
     }
-     */
 }

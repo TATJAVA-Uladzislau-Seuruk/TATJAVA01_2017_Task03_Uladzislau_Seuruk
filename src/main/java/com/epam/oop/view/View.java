@@ -1,9 +1,6 @@
 package com.epam.oop.view;
 
 import com.epam.oop.controller.Controller;
-import com.epam.oop.controller.exception.ControllerException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 /**
  * Implementation of View layer.
@@ -11,7 +8,6 @@ import org.apache.logging.log4j.Logger;
  * @author Uladzislau Seuruk.
  */
 public class View {
-    private static final Logger LOG = LogManager.getRootLogger();
     /**
      * Singleton of this class.
      */
@@ -30,11 +26,7 @@ public class View {
      * @param request <tt>String</tt> with request.
      */
     public void makeRequest(String request) {
-        try {
-            Controller controller = new Controller();
-            System.out.println(controller.executeCommand(request) + "\n");
-        } catch (ControllerException re) {
-            LOG.error("Request execution error", re);
-        }
+        Controller controller = Controller.getInstance();
+        System.out.println(controller.executeCommand(request) + "\n");
     }
 }

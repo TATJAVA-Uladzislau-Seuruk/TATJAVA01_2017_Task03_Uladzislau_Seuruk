@@ -9,49 +9,43 @@ import com.epam.oop.service.factory.ServiceFactory;
 import java.util.List;
 
 /**
- * Implements Command interface for find command.
+ * Implements Command interface for search command.
  *
  * @author Uladzislau Seuruk.
  */
-public class FindNews extends Command {
+public class FindNews implements Command {
     /**
      * Name of command.
      */
     public static final String COMMAND_NAME = "FIND_NEWS";
-    /**
-     * Symbol that separates search words.
-     */
-    private static final char WORDS_DELIMITER = ' ';
 
     /**
      * @see Command#execute(String)
      */
     @Override
     public String execute(String params) throws CommandExecutionException {
-        params = params.trim();
-        String[] args = params.split(String.valueOf(WORDS_DELIMITER));
-        ServiceFactory factory = ServiceFactory.getInstance();
         try {
-            List<News> newsList = factory.getCatalogService().getNews(args);
+            ServiceFactory factory = ServiceFactory.getInstance();
+            List<News> newsList = factory.getCatalogService().getNews(params);
             StringBuilder builder = new StringBuilder();
             for (News news : newsList) {
                 builder.append(getNewsInfo(news));
             }
-            return "Found news:\n" + builder.toString();
+            return "Found news:" + builder.toString();
         } catch (ServiceException se) {
-            throw new CommandExecutionException(se);
+            throw new CommandExecutionException(se.getMessage(), se);
         }
     }
 
     private String getNewsInfo(News news) {
         StringBuilder builder = new StringBuilder();
-        builder.append("\"")
+        builder.append("\n")
+                .append("\"")
                 .append(news.getTitle())
                 .append("\" Category: \"")
                 .append(news.getCategory())
                 .append("\" Publication Date: ")
-                .append(news.getPublicationDate())
-                .append("\n");
+                .append(news.getPublicationDate());
         return  builder.toString();
     }
 }
