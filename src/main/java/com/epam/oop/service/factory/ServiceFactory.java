@@ -1,7 +1,7 @@
 package com.epam.oop.service.factory;
 
 import com.epam.oop.service.CatalogService;
-import com.epam.oop.service.CatalogServiceImpl;
+import com.epam.oop.service.impl.CatalogServiceImpl;
 
 /**
  * Implements Factory design pattern.

@@ -57,7 +57,7 @@ public class TxtWriter implements NewsWriter {
                         new FileOutputStream(file, true)))) {
             out.append(makeFormattedString(news));
         } catch (IOException e) {
-            throw new WritingException(e.getMessage(), e);
+            throw new WritingException(e);
         }
     }
 

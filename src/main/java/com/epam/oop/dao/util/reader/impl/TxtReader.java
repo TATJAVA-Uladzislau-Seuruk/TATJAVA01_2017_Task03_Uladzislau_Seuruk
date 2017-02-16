@@ -56,16 +56,15 @@ public class TxtReader implements NewsReader {
         Set<News> newsSet = new HashSet<>();
         try (Scanner scanner = new Scanner(file)) {
             scanner.useDelimiter(String.valueOf(ParsingSymbols.RECORD_END_SYMBOL));
-            TxtNewsParser parser = new TxtNewsParser();
             while (scanner.hasNext()) {
                 String line = scanner.nextLine();
                 line = line.trim();
                 if (isFit(line, args)) {
-                    newsSet.add(parser.parse(line));
+                    newsSet.add(TxtNewsParser.parse(line));
                 }
             }
         } catch (FileNotFoundException | ItemParsingException e) {
-            throw new ReadingException(e.getMessage(), e);
+            throw new ReadingException(e);
         }
         return newsSet;
     }

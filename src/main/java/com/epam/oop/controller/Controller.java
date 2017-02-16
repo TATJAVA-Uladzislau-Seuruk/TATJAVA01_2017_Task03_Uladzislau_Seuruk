@@ -1,7 +1,6 @@
 package com.epam.oop.controller;
 
 import com.epam.oop.controller.command.Command;
-import com.epam.oop.controller.command.exception.CommandExecutionException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,7 +9,7 @@ import org.apache.logging.log4j.Logger;
  *
  * @author Uladzislau Seuruk.
  */
-public class Controller {
+public final class Controller {
     private static final Logger LOG = LogManager.getRootLogger();
     /**
      * Symbol that separates command form parameters.
@@ -37,10 +36,12 @@ public class Controller {
         if (LOG.isDebugEnabled()) {
             LOG.debug(request);
         }
+
         request = request.trim();
         int index = request.indexOf(DELIMITER);
         Command command;
         String params;
+
         if (index != -1) {
             String commandName = request.substring(0, index);
             command = provider.getCommand(commandName);
@@ -49,16 +50,12 @@ public class Controller {
             command = provider.getCommand(request);
             params = "";
         }
-        try {
-            String response = command.execute(params);
-            if (LOG.isDebugEnabled()) {
-                LOG.debug(response);
-            }
-            return response;
-        } catch (CommandExecutionException cee) {
-            LOG.error("Request execution error", cee);
-            return cee.getMessage();
+
+        String response = command.execute(params);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug(response);
         }
+        return response;
     }
 
     /**

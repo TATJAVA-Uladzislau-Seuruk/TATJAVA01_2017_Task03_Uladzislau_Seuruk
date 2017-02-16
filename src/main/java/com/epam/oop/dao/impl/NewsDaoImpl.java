@@ -1,6 +1,7 @@
-package com.epam.oop.dao;
+package com.epam.oop.dao.impl;
 
 import com.epam.oop.bean.News;
+import com.epam.oop.dao.NewsDao;
 import com.epam.oop.dao.exception.DaoException;
 import com.epam.oop.dao.util.reader.exception.ReadingException;
 import com.epam.oop.dao.util.reader.impl.TxtReader;
@@ -32,7 +33,7 @@ public class NewsDaoImpl implements NewsDao {
         try {
             new TxtWriter(DEFAULT_FILE_PATH).writeToEnd(news);
         } catch (WritingException we) {
-            throw new DaoException(we.getMessage(), we);
+            throw new DaoException(we);
         }
     }
 
@@ -45,7 +46,7 @@ public class NewsDaoImpl implements NewsDao {
             Set<News> newsSet = new TxtReader(DEFAULT_FILE_PATH).read(tags);
             return new ArrayList<>(newsSet);
         } catch (ReadingException re) {
-            throw new DaoException(re.getMessage(), re);
+            throw new DaoException(re);
         }
     }
 }

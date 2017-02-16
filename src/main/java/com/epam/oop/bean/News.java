@@ -8,6 +8,7 @@ import java.io.Serializable;
  * @author Uladzislau Seuruk.
  */
 public class News implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * Category of this news.
      */
@@ -28,6 +29,49 @@ public class News implements Serializable {
         this.title = title;
         this.publicationDate = date;
     }
+
+    /**
+     * Getter.
+     */
+    public Category getCategory() {
+        return category;
+    }
+
+    /**
+     * Getter.
+     */
+    public String getPublicationDate() {
+        return publicationDate;
+    }
+
+    /**
+     * Getter.
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * Setter.
+     */
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    /**
+     * Setter.
+     */
+    public void setPublicationDate(String publicationDate) {
+        this.publicationDate = publicationDate;
+    }
+
+    /**
+     * Setter.
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
 
     @Override
     public boolean equals(Object object) {
@@ -68,27 +112,6 @@ public class News implements Serializable {
         } else {
             return this.title.equals(news.title);
         }
-    }
-
-    /**
-     * Getter.
-     */
-    public Category getCategory() {
-        return category;
-    }
-
-    /**
-     * Getter.
-     */
-    public String getPublicationDate() {
-        return publicationDate;
-    }
-
-    /**
-     * Getter.
-     */
-    public String getTitle() {
-        return title;
     }
 
     @Override

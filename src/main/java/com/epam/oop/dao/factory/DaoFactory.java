@@ -1,7 +1,7 @@
 package com.epam.oop.dao.factory;
 
 import com.epam.oop.dao.NewsDao;
-import com.epam.oop.dao.NewsDaoImpl;
+import com.epam.oop.dao.impl.NewsDaoImpl;
 
 /**
  * Implements Factory design pattern.
